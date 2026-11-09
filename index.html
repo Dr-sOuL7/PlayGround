@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090b11" />
+  <meta name="description" content="Beyblade: Arena — build your machine. Read the match. Own the ring." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>BEYBLADE: ARENA — Command Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#home" aria-label="Beyblade Arena home">
+        <span class="brand-mark"><span></span><i></i></span>
+        <span class="brand-copy"><b>BEYBLADE</b><small>ARENA <em>◈</em></small></span>
+      </a>
+      <div class="season-pill"><span class="live-dot"></span> SEASON 01 <span class="season-label">OPEN CIRCUIT</span></div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <p class="nav-caption">COMPETE</p>
+        <button class="nav-item active" data-view="home"><span class="nav-icon">◈</span>Command deck</button>
+        <button class="nav-item" data-view="arena"><span class="nav-icon">◎</span>Battle arena<span class="nav-badge">LOCAL</span></button>
+        <button class="nav-item" data-view="rankings"><span class="nav-icon">♧</span>Rankings</button>
+        <p class="nav-caption nav-gap">YOUR GARAGE</p>
+        <button class="nav-item" data-view="workshop"><span class="nav-icon">⌘</span>Workshop</button>
+        <button class="nav-item" data-view="collection"><span class="nav-icon">▦</span>Collection<span class="nav-count">39</span></button>
+        <button class="nav-item" data-view="history"><span class="nav-icon">◷</span>Match history</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="connection"><span class="connection-icon">⌁</span><span><b>LOCAL PROTOTYPE</b><small>Online play coming soon</small></span><i></i></div>
+        <button class="profile-mini" id="profileButton"><span class="avatar">K</span><span><b id="profileName">KAIRO</b><small>FREE BLADER</small></span><span class="profile-menu">···</span></button>
+      </div>
+      <button class="mobile-close" id="mobileClose" aria-label="Close menu">×</button>
+    </aside>
+    <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="breadcrumb"><span>ARENA NETWORK</span><b>/</b><strong id="pageLabel">COMMAND DECK</strong></div>
+        <div class="top-actions"><span class="online-status"><i></i> SIMULATION READY</span><button class="icon-button" id="soundButton" aria-label="Toggle sound" title="Sound effects">♫<span class="sound-off"></span></button><button class="avatar top-avatar" id="topAvatar">K</button></div>
+      </header>
+      <div id="viewRoot" class="view-root"></div>
+      <footer class="footer"><span>BEYBLADE: ARENA <i>©</i> 2026</span><span>COMPETITION IS BUILT. NOT BOUGHT.</span><span>BUILD <b>0.1.0</b></span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
