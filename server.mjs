@@ -3,9 +3,9 @@ import { createServer } from 'node:http';
 import { extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = resolve(fileURLToPath(new URL('.', import.meta.url)));
+const ROOT = resolve(process.env.STATIC_DIR || fileURLToPath(new URL('./dist', import.meta.url)));
 const HOST = process.env.HOST || '127.0.0.1';
-const PORT = Number(process.env.PORT || 3002);
+const PORT = Number(process.env.PORT || 3000);
 const TYPES = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
