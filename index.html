@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101114">
+  <meta name="description" content="Forge your Beyblade, read your rival, and battle in a strategic physics-inspired arena.">
+  <title>SPIN//FORGE — Beyblade Arena</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="wordmark" href="#home" aria-label="Spin Forge home"><span class="brand-mark">S</span><span>SPIN<span class="brand-slash">//</span>FORGE</span></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-view="forge">FORGE</button>
+        <button class="nav-link" data-view="arena">ARENA</button>
+        <button class="nav-link" data-view="guide">FIELD GUIDE</button>
+      </nav>
+      <div class="top-status"><span class="status-dot"></span><span>STADIUM ONLINE</span><span class="profile-chip"><span class="profile-avatar">P</span> PLAYER</span></div>
+    </header>
+
+    <main>
+      <section id="forge-view" class="view active">
+        <div class="hero-row">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> COMPONENT LAB · 07,680 BUILDS</div>
+            <h1>Build your<br><span class="text-gradient">own legend.</span></h1>
+            <p class="hero-copy">Every part is a trade-off. Tune your build, find your rhythm, then let it rip.</p>
+          </div>
+          <div class="hero-stamp"><span class="stamp-ring">NO<br>PAY<br>TO WIN</span><span class="stamp-caption">JUST<br>GOOD BUILDS</span></div>
+        </div>
+
+        <div class="forge-layout">
+          <section class="panel build-panel">
+            <div class="section-heading"><div><span class="section-index">01</span><h2>THE BUILD BAY</h2></div><span class="quiet-label">4 PARTS · 1 BEY</span></div>
+            <label class="name-field"><span>BEY NAME</span><input id="build-name" maxlength="24" placeholder="Name your creation" value="Aetherion" autocomplete="off"></label>
+            <div class="part-list">
+              <div class="part-row"><div class="part-icon core-icon">✳</div><div class="part-info"><div class="part-topline"><span>CORE</span><span class="part-role">IDENTITY</span></div><select id="core-select" aria-label="Choose core"></select></div><span id="core-color" class="color-swatch"></span></div>
+              <div class="part-row"><div class="part-icon blade-icon">◈</div><div class="part-info"><div class="part-topline"><span>BLADE</span><span class="part-role">ATTACK / LOCK</span></div><select id="blade-select" aria-label="Choose blade"></select></div><div id="blade-values" class="pair-values"></div></div>
+              <div class="part-row"><div class="part-icon disc-icon">◉</div><div class="part-info"><div class="part-topline"><span>DISC</span><span class="part-role">MASS / STABILITY</span></div><select id="disc-select" aria-label="Choose disc"></select></div><div id="disc-values" class="pair-values"></div></div>
+              <div class="part-row"><div class="part-icon tip-icon">⌁</div><div class="part-info"><div class="part-topline"><span>TIP</span><span class="part-role">MOBILITY / STAMINA</span></div><select id="tip-select" aria-label="Choose tip"></select><div id="tip-identity" class="part-identity"></div></div><div id="tip-values" class="pair-values"></div></div>
+            </div>
+            <div class="build-actions"><button id="random-build" class="button button-quiet">↻ RANDOMIZE</button><button id="save-build" class="button button-quiet">＋ SAVE BUILD</button></div>
+          </section>
+
+          <section class="preview-column">
+            <div id="bey-card" class="bey-card">
+              <div class="card-grid"></div><div class="card-top"><span class="mini-label">CUSTOM ASSEMBLY <span id="assembly-number">#001</span></span><span id="core-badge" class="core-badge">AF</span></div>
+              <div class="bey-render" id="preview-bey"><div class="bey-shadow"></div><div class="bey-outer"><div class="bey-inner"><div class="bey-center"></div><i class="blade-fin fin-one"></i><i class="blade-fin fin-two"></i><i class="blade-fin fin-three"></i><i class="blade-fin fin-four"></i></div></div><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></div>
+              <div class="card-bottom"><div><span class="mini-label">YOUR BEYBLADE</span><h2 id="preview-name">Aetherion</h2><span id="preview-parts" class="parts-line">B01 · D01 · T01</span></div><div id="type-pill" class="type-pill">BALANCE TYPE</div></div>
+            </div>
+            <div class="stat-panel panel"><div class="section-heading compact"><div><span class="section-index">02</span><h2>STAT PROFILE</h2></div><span id="specialization-label" class="quiet-label">WELL ROUNDED</span></div><div id="stat-bars" class="stat-bars"></div></div>
+            <div id="saved-builds" class="saved-builds" aria-live="polite"></div>
+            <button id="start-battle" class="button button-primary start-button"><span>ENTER THE ARENA</span><span class="button-arrow">↗</span></button>
+          </section>
+        </div>
+      </section>
+
+      <section id="arena-view" class="view">
+        <div class="arena-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> LIVE COMBAT · BEST OF ONE</div><h1>THE <span class="text-gradient">SPIN PIT</span></h1></div><button id="back-to-forge" class="button button-quiet">← BACK TO FORGE</button></div>
+        <div id="prebattle" class="prebattle panel"><div class="prebattle-copy"><div class="section-index">READY CHECK</div><h2>Rival detected.</h2><p>Choose your opponent’s build style. Your first arena turn starts as soon as you launch.</p></div><div class="rival-select-wrap"><label for="rival-style">RIVAL ARCHETYPE</label><select id="rival-style"><option value="random">Mystery rival · randomized</option><option value="attack">Attack · high impact, fragile lock</option><option value="defense">Defense · anchor and outlast</option><option value="stamina">Stamina · charge and endure</option><option value="balance">Balance · adaptable all-rounder</option></select><button id="launch-match" class="button button-primary">LAUNCH MATCH <span>↗</span></button></div></div>
+        <div id="battle-screen" class="battle-screen hidden">
+          <div class="match-topline"><div><span class="live-tag"><i></i> LIVE</span><span id="turn-label">TURN 01</span></div><button id="surrender" class="surrender-button">FORFEIT MATCH</button></div>
+          <div id="arena" class="arena">
+            <div class="arena-glow"></div><div class="arena-ring ring-outer"></div><div class="arena-ring ring-middle"></div><div class="arena-ring ring-inner"></div><div class="arena-crosshair cross-one"></div><div class="arena-crosshair cross-two"></div>
+            <div id="arena-bey-0" class="arena-bey player-bey"><div class="arena-bey-core"></div><span class="spin-trail"></span></div>
+            <div id="arena-bey-1" class="arena-bey rival-bey"><div class="arena-bey-core"></div><span class="spin-trail"></span></div>
+            <div class="arena-center-mark">S<br><span>PIT</span></div>
+            <div class="arena-fighter fighter-left"><span class="fighter-side">YOU</span><strong id="arena-name-0">Aetherion</strong><span id="arena-type-0" class="fighter-type">BALANCE TYPE</span></div>
+            <div class="arena-fighter fighter-right"><span class="fighter-side">RIVAL</span><strong id="arena-name-1">Rift</strong><span id="arena-type-1" class="fighter-type">ATTACK TYPE</span></div>
+            <div id="impact-flash" class="impact-flash"></div>
+          </div>
+          <div class="fighter-status-grid">
+            <div id="fighter-status-0" class="fighter-status panel"></div><div class="versus-mark">VS</div><div id="fighter-status-1" class="fighter-status panel"></div>
+          </div>
+          <div class="battle-lower-grid"><section class="action-panel panel"><div class="section-heading compact"><div><span class="section-index">YOUR MOVE</span><h2>CALL YOUR PLAY</h2></div><span id="action-hint" class="quiet-label">RIVAL’S MOVE IS HIDDEN</span></div><div id="action-buttons" class="action-buttons"></div><div class="action-footnote">Both moves lock in together. Read the pattern, not the prompt.</div></section><section class="log-panel panel"><div class="section-heading compact"><div><span class="section-index">ARENA FEED</span><h2>COMBAT LOG</h2></div><span id="instability-label" class="quiet-label">ARENA STABLE</span></div><div id="combat-log" class="combat-log"></div></section></div>
+          <div id="result-banner" class="result-banner hidden"></div>
+        </div>
+      </section>
+
+      <section id="guide-view" class="view">
+        <div class="arena-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> FIELD NOTES · KNOW YOUR SPIN</div><h1>PLAY <span class="text-gradient">SMARTER.</span></h1></div></div>
+        <div class="guide-grid">
+          <article class="panel guide-card"><span class="section-index">01 / THE BUILD</span><h2>Every stat is a trade.</h2><p>Blade attack and lock integrity always total 80. Disc mass and stability total 100. Tip mobility and stamina total 100. Your core is pure style.</p><div class="conservation-row"><span>AP + LI</span><strong>80</strong><span>MS + ST</span><strong>100</strong><span>MB + SM</span><strong>100</strong></div></article>
+          <article class="panel guide-card"><span class="section-index">02 / YOUR MOVES</span><h2>Five ways to win.</h2><div class="move-guide"><b>ATTACK</b><span>1.5× impact · raise collision odds. Exposed to reads.</span><b>DEFEND</b><span>Chip damage and guard; repeated guarding fatigues.</span><b>DODGE</b><span>Reduce incoming impact, lower engagement. Decays each repeat.</span><b>CHARGE</b><span>Build special meter. Exposed to 1.25× damage and burst risk.</span><b>SPECIAL</b><span>5× impact, but recoil can cost you the match.</span></div></article>
+          <article class="panel guide-card"><span class="section-index">03 / READ THE RING</span><h2>Win the long game.</h2><p>Rival moves stay hidden until both actions resolve. A charge or dodge can be punished by a well-timed attack. Repeating a pattern too long makes you readable.</p><p>Pressure pushes a Bey toward ring-out; energy drains every turn. The stadium destabilizes gradually, making late rounds riskier.</p></article>
+          <article class="panel guide-card"><span class="section-index">04 / THE ENGINE</span><h2>Chance, not chaos.</h2><p>Collisions use a mobility- and action-based probability. Impact gets a small ±10% variance. Burst odds are nonlinear and capped; a big special raises risk but never guarantees a finish.</p><p>Match ends by burst, ring-out, or spin-out. Simultaneous finishes are draws. At turn 40, judges compare remaining energy, stability, and pressure.</p></article>
+        </div>
+      </section>
+    </main>
+    <footer><span>SPIN//FORGE <span class="footer-dot">·</span> BUILT TO SPIN</span><span>NO GRIND. NO PAY-TO-WIN. JUST GOOD BUILDS.</span></footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
