@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101016" />
+  <link rel="icon" href="data:," />
+  <title>SPIN//CLASH — Beyblade Combat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Spin Clash home"><span class="brand-mark">S<span>//</span>C</span><span class="brand-name">SPIN<span>//</span>CLASH</span></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-view="battle">Battle</button>
+        <button class="nav-link" data-view="garage">Garage</button>
+        <button class="nav-link" data-view="guide">Field guide</button>
+      </nav>
+      <div class="profile"><span class="online-dot"></span><span>LOCAL ARENA</span><span class="profile-avatar">P1</span></div>
+    </header>
+
+    <main>
+      <section id="battleView" class="view battle-view">
+        <div class="page-heading">
+          <div><p class="eyebrow"><span class="live-dot"></span> PRACTICE MATCH <span class="heading-divider">/</span> <span id="matchLabel">VS. RIVAL AI</span></p><h1>THE <em>SPIN</em> PIT</h1><p class="subhead">Read the rhythm. Pick your moment. Make every collision count.</p></div>
+          <button class="ghost-button" id="newMatch"><span>↻</span> NEW MATCH</button>
+        </div>
+
+        <div class="battle-layout">
+          <div class="arena-column">
+            <section class="arena-card">
+              <div class="arena-topline"><span><i class="tiny-square"></i> IRONWOOD BOWL</span><span class="round-pill"><b id="stepNum">01</b><span>/ 24</span></span><span class="instability-label">ARENA INSTABILITY <b id="instabilityNum">01</b></span></div>
+              <div class="arena-scene" id="arenaScene">
+                <div class="arena-grid"></div><div class="arena-glow"></div>
+                <div class="arena-ring ring-outer"></div><div class="arena-ring ring-inner"></div><div class="arena-cross"></div>
+                <div class="arena-center">SC<span>//</span>01</div>
+                <div class="spark spark-one"></div><div class="spark spark-two"></div>
+                <div id="playerTop" class="fighter fighter-opponent"><div class="fighter-shadow"></div><div class="blade-visual opponent-blade"><span class="blade-core"></span><span class="blade-spoke"></span></div><div class="fighter-tag"><span class="tag-dot red"></span><span id="opponentNameArena">DRIFT PHANTOM</span></div></div>
+                <div id="playerBottom" class="fighter fighter-player"><div class="fighter-shadow"></div><div class="blade-visual player-blade"><span class="blade-core"></span><span class="blade-spoke"></span></div><div class="fighter-tag"><span class="tag-dot blue"></span><span id="playerNameArena">AETHERION</span></div></div>
+                <div class="versus">VS</div><div class="arena-action-flash" id="actionFlash"></div>
+              </div>
+              <div class="arena-status"><span class="status-pulse"></span><span id="statusText">Choose your opening move</span><span id="collisionOdds" class="status-odds">COLLISION —</span></div>
+            </section>
+
+            <div class="combatants">
+              <article class="combatant player-card">
+                <div class="combatant-head"><div class="identity"><div class="mini-emblem blue-emblem">✦</div><div><h2 id="playerTitle">Aetherion</h2><p><span id="playerType">BALANCE TYPE</span><span class="identity-sep">·</span> YOU</p></div></div><button class="edit-build" id="editBuild">EDIT BUILD ↗</button></div>
+                <div class="vitals"><div class="vital-row"><span>SPIN ENERGY</span><b id="playerEnergyText">100</b></div><div class="meter"><div class="meter-fill energy-fill" id="playerEnergyBar"></div></div><div class="vital-row second-vital"><span>POSITION PRESSURE</span><b id="playerPressureText">0 <small>/ 120</small></b></div><div class="meter pressure-meter"><div class="meter-fill pressure-fill" id="playerPressureBar"></div></div></div>
+                <div class="combatant-foot"><span>CHARGE <b id="playerMeter">0%</b></span><div class="charge-track"><i id="playerChargeBar"></i></div><span class="combo-chip" id="playerCombo">COMBO ×0</span></div>
+              </article>
+              <div class="center-separator"><span>—</span><b>VS</b><span>—</span></div>
+              <article class="combatant rival-card">
+                <div class="combatant-head"><div class="identity"><div class="mini-emblem red-emblem">✹</div><div><h2 id="opponentTitle">Drift Phantom</h2><p><span id="opponentType">ATTACK TYPE</span><span class="identity-sep">·</span> RIVAL AI</p></div></div><span class="ai-badge">AI PILOT</span></div>
+                <div class="vitals"><div class="vital-row"><span>SPIN ENERGY</span><b id="opponentEnergyText">100</b></div><div class="meter"><div class="meter-fill energy-fill rival-energy-fill" id="opponentEnergyBar"></div></div><div class="vital-row second-vital"><span>POSITION PRESSURE</span><b id="opponentPressureText">0 <small>/ 120</small></b></div><div class="meter pressure-meter"><div class="meter-fill pressure-fill rival-pressure-fill" id="opponentPressureBar"></div></div></div>
+                <div class="combatant-foot"><span>CHARGE <b id="opponentMeter">0%</b></span><div class="charge-track rival-charge"><i id="opponentChargeBar"></i></div><span class="combo-chip" id="opponentCombo">COMBO ×0</span></div>
+              </article>
+            </div>
+
+            <section class="action-panel">
+              <div class="action-heading"><div><p class="eyebrow">YOUR MOVE <span class="step-small">— STEP <b id="actionStep">01</b></span></p><h2>Call your play.</h2></div><span class="turn-clock"><span>⌛</span> <b id="clock">60</b>s</span></div>
+              <div class="action-grid">
+                <button class="action-button attack-action" data-action="attack"><span class="action-icon">↗</span><span class="action-copy"><b>ATTACK</b><small>Heavy hit · high recoil</small></span><span class="action-key">1</span></button>
+                <button class="action-button defend-action" data-action="defend"><span class="action-icon">⬡</span><span class="action-copy"><b>DEFEND</b><small>Brace · build guard</small></span><span class="action-key">2</span></button>
+                <button class="action-button dodge-action" data-action="dodge"><span class="action-icon">⤴</span><span class="action-copy"><b>DODGE</b><small>Evade · timing matters</small></span><span class="action-key">3</span></button>
+                <button class="action-button charge-action" data-action="charge"><span class="action-icon">ϟ</span><span class="action-copy"><b>CHARGE</b><small>Build meter · exposed</small></span><span class="action-key">4</span></button>
+                <button class="action-button special-action" data-action="special" id="specialButton" disabled><span class="action-icon">✦</span><span class="action-copy"><b>SPECIAL</b><small id="specialHint">Needs 100% charge</small></span><span class="action-key">5</span></button>
+              </div>
+              <div class="hint-line"><span class="hint-icon">i</span><span id="actionHint">Attack raises collision odds. Charge safely when the rival is off-balance.</span><span class="adapt-hint" id="adaptHint">BREAK A REPEAT: +5% ADAPTATION</span></div>
+            </section>
+          </div>
+
+          <aside class="side-column">
+            <section class="side-card build-card"><div class="side-title"><div><p class="eyebrow">YOUR MACHINE</p><h3>Build profile</h3></div><button class="text-action" id="sideEdit">EDIT ↗</button></div><div class="blade-showcase"><div class="showcase-orbit orbit-a"></div><div class="showcase-orbit orbit-b"></div><div class="showcase-blade"><span></span></div><div class="showcase-label">CORE / <b id="coreLabel">AETHERION</b></div></div><div class="type-banner"><span class="type-icon">✦</span><div><b id="sideType">BALANCE TYPE</b><small id="typeDescription">Versatile and hard to read</small></div><span class="type-bonus" id="typeBonus">+5%</span></div><div class="stat-list" id="playerStats"></div><button class="full-outline" id="loadoutButton">OPEN BUILD LAB <span>↗</span></button></section>
+            <section class="side-card log-card"><div class="side-title"><div><p class="eyebrow">LIVE FEED</p><h3>Match log</h3></div><span class="live-label"><i></i> LIVE</span></div><div class="log-list" id="logList" aria-live="polite"></div></section>
+            <div class="fine-print"><span>◈</span> SMALL RANDOMNESS. BIG DECISIONS.<br><span class="fine-sub">Every part trades one advantage for another.</span></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="garageView" class="view garage-view hidden">
+        <div class="page-heading"><div><p class="eyebrow">TUNE YOUR MACHINE <span class="heading-divider">/</span> NO UPGRADES, ONLY TRADE-OFFS</p><h1>THE <em>BUILD</em> LAB</h1><p class="subhead">Every part conserves value. Shape your edge, then prove it in the bowl.</p></div><button class="ghost-button" id="garageBattle">← BACK TO BATTLE</button></div>
+        <div class="garage-layout"><div class="lab-main"><div class="part-card core-part"><div class="part-heading"><div class="part-number">01</div><div><p class="eyebrow">COSMETIC ONLY · NO STATS</p><h2>Choose your core</h2></div><span class="part-sum">IDENTITY</span></div><div class="core-options" id="coreOptions"></div></div>
+          <div class="part-card"><div class="part-heading"><div class="part-number">02</div><div><p class="eyebrow">BLADE · AP + LI = 80</p><h2>Attack / Lock</h2></div><span class="part-sum">80 TOTAL</span></div><div class="slider-row"><div><span>ATTACK POWER <small>AP</small></span><b id="apValue">56</b></div><input id="apSlider" type="range" min="10" max="70" value="56"><div class="slider-ends"><span>LOCK INTEGRITY</span><b id="liValue">24 LI</b></div></div><p class="part-note">More impact means more recoil — and a looser lock is easier to burst.</p></div>
+          <div class="part-card"><div class="part-heading"><div class="part-number">03</div><div><p class="eyebrow">DISC · MS + ST = 100</p><h2>Mass / Stability</h2></div><span class="part-sum">100 TOTAL</span></div><div class="slider-row"><div><span>MASS <small>MS</small></span><b id="msValue">48</b></div><input id="msSlider" type="range" min="20" max="80" value="48"><div class="slider-ends"><span>STABILITY</span><b id="stValue">52 ST</b></div></div><p class="part-note">Mass resists ring-outs. Stability cushions hits and reduces recoil.</p></div>
+          <div class="part-card"><div class="part-heading"><div class="part-number">04</div><div><p class="eyebrow">TIP · MB + SM = 100</p><h2>Mobility / Stamina</h2></div><span class="part-sum">100 TOTAL</span></div><div class="slider-row"><div><span>MOBILITY <small>MB</small></span><b id="mbValue">52</b></div><input id="mbSlider" type="range" min="20" max="80" value="52"><div class="slider-ends"><span>STAMINA</span><b id="smValue">48 SM</b></div></div><p class="part-note">Mobility increases engagement odds. Stamina keeps your spin alive.</p></div>
+          <div class="lab-actions"><button class="ghost-button" id="resetBuild">RESET DEFAULT</button><button class="primary-button" id="saveBuild">SAVE BUILD <span>↗</span></button></div>
+        </div><aside class="lab-aside"><section class="side-card preview-card"><div class="side-title"><div><p class="eyebrow">LIVE PREVIEW</p><h3 id="previewName">Aetherion</h3></div><span class="preview-type" id="previewType">BALANCE</span></div><div class="preview-arena"><div class="preview-rings"></div><div class="preview-top"><span></span></div><div class="preview-spec">YOUR BUILD<br><b id="previewDomain">WELL ROUNDED</b></div></div><div class="preview-stat-grid"><div><span>AP</span><b id="previewAP">56</b></div><div><span>ST</span><b id="previewST">52</b></div><div><span>SM</span><b id="previewSM">48</b></div><div><span>MB</span><b id="previewMB">52</b></div><div><span>MS</span><b id="previewMS">48</b></div><div><span>LI</span><b id="previewLI">24</b></div></div><div class="conservation-note"><span>✓</span> Parts conserve total value — no stat is free.</div><button class="full-outline" id="previewBattle">TEST THIS BUILD <span>→</span></button></section><div class="tip-card"><span>✦</span><div><b>DESIGN LAW</b><p>Extremes create their own penalties. There is no perfect build — only the right build for your plan.</p></div></div></aside></div>
+      </section>
+
+      <section id="guideView" class="view guide-view hidden"><div class="page-heading"><div><p class="eyebrow">LEARN THE RHYTHM <span class="heading-divider">/</span> FIELD NOTES</p><h1>READ THE <em>ARENA</em></h1><p class="subhead">Outthink the spin, not the dice.</p></div><button class="ghost-button" id="guideBattle">← BACK TO BATTLE</button></div><div class="guide-grid"><article class="guide-feature"><p class="eyebrow">THE LOOP</p><h2>Pick a move.<br><em>Read the response.</em></h2><p>Both pilots choose, then the arena resolves one simultaneous exchange. Your rival telegraphs tendencies in the match log — use it.</p><div class="guide-flow"><span>01 · CHOOSE</span><i>→</i><span>02 · COLLIDE</span><i>→</i><span>03 · ADAPT</span></div></article><div class="guide-moves"><article><span class="guide-icon attack-color">↗</span><div><b>ATTACK</b><p>High impact and +15% collision chance. Punishes charging and dodging; costs spin and risks recoil.</p></div></article><article><span class="guide-icon defend-color">⬡</span><div><b>DEFEND</b><p>Reduce incoming damage. Repeated guarding fatigues, so mix it up before your guard gets read.</p></div></article><article><span class="guide-icon dodge-color">⤴</span><div><b>DODGE</b><p>Lower the chance of collision. Repeated dodges lose effectiveness — time the escape against big moves.</p></div></article><article><span class="guide-icon charge-color">ϟ</span><div><b>CHARGE / SPECIAL</b><p>Charge to 100%, then unleash a ×5 strike. Charging leaves you exposed; specials are powerful but costly.</p></div></article></div><div class="guide-rules"><div><span>01</span><b>BURST</b><p>Impact tests the opponent's lock integrity. A burst ends the match instantly.</p></div><div><span>02</span><b>RING-OUT</b><p>Pressure above 120 creates a growing chance of being knocked out of the bowl.</p></div><div><span>03</span><b>SPIN-OUT</b><p>Spin energy drains every turn and during collisions. Hit zero and you lose.</p></div><div><span>04</span><b>ADAPT</b><p>Switch away from repeated actions for a small effectiveness bonus. Repetition is readable.</p></div></div><div class="guide-disclaimer">A local practice pilot stands in for Telegram PvP here. Real-time Telegram challenges require a bot token and backend service.</div></div></section>
+    </main>
+    <footer><span>SPIN<span>//</span>CLASH</span><span>NO LEVELS. NO FREE WINS. JUST GOOD BUILDS.</span><span>BUILD 01 <i>·</i> PRACTICE ARENA</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="result-overlay hidden" id="resultOverlay"><div class="result-card"><div class="result-mark" id="resultMark">✦</div><p class="eyebrow">MATCH COMPLETE · STEP <span id="resultStep">—</span></p><h2 id="resultTitle">VICTORY</h2><p id="resultCopy">Your build found its moment.</p><div class="result-stats" id="resultStats"></div><button class="primary-button" id="resultRematch">RUN IT BACK <span>↻</span></button><button class="text-action result-garage" id="resultGarage">TUNE YOUR BUILD ↗</button></div></div>
+  <script src="game.js"></script>
+</body>
+</html>
