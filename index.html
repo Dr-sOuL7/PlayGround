@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#090c13" />
+  <title>sOuLsSPIN — Physics. Strategy. Skill.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"}}</script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="sOuLsSPIN home"><span class="brand-mark"><i></i><i></i><i></i></span><span>sOuLs<span class="brand-light">SPIN</span></span></a>
+      <div class="top-tagline"><span class="live-dot"></span> PHYSICS. STRATEGY. SKILL.</div>
+      <nav class="topnav" aria-label="Main navigation">
+        <button class="nav-link active" data-panel="battle">Battle</button>
+        <button class="nav-link" data-panel="workshop">Workshop</button>
+        <button class="nav-link" data-panel="records">Records</button>
+      </nav>
+      <button class="profile"><span class="profile-icon">S</span><span class="profile-name">SOUL PILOT</span><span class="chevron">⌄</span></button>
+    </header>
+
+    <main class="main-layout">
+      <aside class="left-rail">
+        <div class="eyebrow">COMPETITIVE ARENA <span>01 / 04</span></div>
+        <h1>Own the<br><em>momentum.</em></h1>
+        <p class="intro">Build your strategy. Read the clash. Make every rotation count.</p>
+        <div class="mode-card">
+          <div class="section-label">MATCH FORMAT <span class="mini-lock">LOCAL PLAY</span></div>
+          <div class="mode-grid">
+            <button class="mode-option selected" data-mode="1v1"><strong>1v1</strong><small>DUEL</small></button>
+            <button class="mode-option" data-mode="2v2"><strong>2v2</strong><small>TEAMS</small></button>
+            <button class="mode-option" data-mode="3v3"><strong>3v3</strong><small>TEAMS</small></button>
+            <button class="mode-option" data-mode="round-robin"><strong>RR</strong><small>ROUND ROBIN</small></button>
+          </div>
+          <div class="opponent-row"><span class="opponent-avatar">AI</span><span><b>RIVAL PILOT</b><small id="ai-style-label">TACTICIAN · STANDARD</small></span><button id="bot-settings" class="settings-btn" title="Customize bot">⚙</button></div>
+        </div>
+
+        <div class="loadout-card">
+          <div class="section-label">YOUR LOADOUT <button class="text-action" data-open-workshop>EDIT ↗</button></div>
+          <div class="loadout-title"><span id="build-name">ASTRA VANGUARD</span><span class="build-tag">BALANCED</span></div>
+          <div class="component-list" id="component-summary">
+            <div><span class="part-gem core-gem">✦</span><span>CORE</span><b id="core-name">Astra</b></div>
+            <div><span class="part-gem blade-gem">✧</span><span>BLADE</span><b id="blade-name">Vanguard</b></div>
+            <div><span class="part-gem disc-gem">◉</span><span>DISC</span><b id="disc-name">Orbit</b></div>
+            <div><span class="part-gem tip-gem">◆</span><span>TIP</span><b id="tip-name">Glide</b></div>
+          </div>
+          <div class="stat-bars">
+            <div class="statline"><span>SPIN</span><div class="stat-track"><i id="loadout-spin" style="width:76%"></i></div><b id="spin-score">76</b></div>
+            <div class="statline"><span>BURST</span><div class="stat-track burst"><i id="loadout-burst" style="width:70%"></i></div><b id="burst-score">70</b></div>
+          </div>
+        </div>
+        <div class="fair-play"><span class="fair-icon">✳</span><span><b>FAIR PLAY, ALWAYS</b><small>All parts unlocked. Skill decides.</small></span></div>
+        <div class="left-footer"><span>BUILD 0.1.0 · PROTOTYPE</span><span>● ALL SYSTEMS READY</span></div>
+      </aside>
+
+      <section class="arena-column" aria-label="Battle arena">
+        <div class="arena-topline"><div><span class="arena-kicker">THE IRON CROWN</span><span class="arena-sub">MAGNETIC STADIUM <i>•</i> ROUND <b id="round-number">01</b></span></div><div class="camera-control"><span>VIEW</span><button class="camera-btn active" data-camera="top">TOP</button><button class="camera-btn" data-camera="side">SIDE</button><button class="camera-btn" data-camera="pov">POV</button></div></div>
+        <div class="arena-frame">
+          <div id="arena-canvas" class="arena-canvas"></div>
+          <div class="arena-vignette"></div>
+          <div class="arena-hud-top"><div class="hud-chip"><span class="signal"></span><span id="phase-label">ARENA STANDBY</span></div><div class="timer"><span id="phase-count">10</span><small>SEC</small></div><div class="hud-chip round-chip">FIRST TO <b>05</b></div></div>
+          <div class="player-readout left-readout"><span class="player-swatch blue-swatch"></span><div><b>YOU</b><small id="you-bey-label">ASTRA VANGUARD</small></div><div class="score-orbs" id="you-score"></div></div>
+          <div class="player-readout right-readout"><span class="player-swatch red-swatch"></span><div><b>RIVAL</b><small id="rival-bey-label">NOVA STRIKER</small></div><div class="score-orbs" id="rival-score"></div></div>
+          <div class="combat-stats">
+            <div class="fighter-stat you-stat"><span>SPIN</span><div><i id="you-spin-bar"></i></div><b id="you-spin-value">100</b><small>BURST <b id="you-burst-value">100</b></small></div>
+            <div class="fighter-stat rival-stat"><span>SPIN</span><div><i id="rival-spin-bar"></i></div><b id="rival-spin-value">100</b><small>BURST <b id="rival-burst-value">100</b></small></div>
+          </div>
+          <div id="center-callout" class="center-callout"><span class="callout-overline">THE IRON CROWN</span><b>READY WHEN<br>YOU ARE</b><small>LAUNCH INTO THE ARENA</small></div>
+          <div class="impact-label" id="impact-label">CLASH!</div>
+          <div class="arena-bottom"><span><i class="keycap">M</i> MANUAL <b id="control-state">—</b></span><span id="arena-tip">LAUNCH BOTH BEYS TO BEGIN</span><span>01 / 01 <i class="expand-icon">⛶</i></span></div>
+        </div>
+        <div class="arena-actions"><button id="launch-btn" class="launch-button"><span class="launch-icon">↗</span><span><b>LAUNCH BEYS</b><small>ENTER THE ARENA</small></span><kbd>SPACE</kbd></button><div class="match-hint"><span class="hint-icon">⌁</span><span><b>CONTROL THE CLASH</b><small>10s autonomous · 10s manual</small></span></div><button id="sound-btn" class="sound-button" title="Toggle sound">♫ <span>SOUND ON</span></button></div>
+      </section>
+
+      <aside class="right-rail">
+        <div class="right-heading"><div><span class="eyebrow">YOUR PILOT CONSOLE</span><h2>Battle controls</h2></div><span class="control-phase" id="right-phase">STANDBY</span></div>
+        <div class="control-block"><div class="control-head"><span>01</span><b>STEER</b><small id="control-mode-text">MANUAL PHASE</small></div><div class="control-main"><div class="joystick-wrap"><div id="joystick-base" class="joystick-base"><div id="joystick-knob" class="joystick-knob"><span></span></div></div><small>DRAG TO STEER</small></div><div class="key-guide"><div class="key-row"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div><small>OR ARROW KEYS</small><span id="joystick-direction">NORTH</span></div></div></div>
+        <div class="special-actions"><div class="control-head"><span>02</span><b>SPECIAL ACTION</b><small>ONE PER PHASE</small></div><div class="action-row"><button class="action-button dash-action" id="dash-btn"><span class="action-symbol">➤</span><span><b>DASH</b><small>BURST OF SPEED</small></span><kbd>SHIFT</kbd></button><button class="action-button tilt-action" id="tilt-btn"><span class="action-symbol">↗</span><span><b>TILT</b><small>LEAN INTO ATTACK</small></span><kbd>E</kbd></button></div><div class="action-note" id="action-note">Choose your opening. A special locks out the other until next manual phase.</div></div>
+        <div class="avatar-panel"><div class="avatar-head"><div><span class="avatar-tag">CORE ABILITY</span><h3><span id="avatar-icon">✦</span> <span id="avatar-name">ASTRAL PULSE</span></h3></div><span id="avatar-ready" class="ability-state">LOCKED</span></div><p id="avatar-description">An expanding pulse disrupts nearby rivals and restores your balance.</p><div class="avatar-requirement"><div class="requirement-track"><i id="avatar-threshold"></i><span></span></div><span>ACTIVATE AT <b>≤50% BURST</b></span></div><button id="avatar-btn" class="avatar-button" disabled><span>✦</span> ACTIVATE AVATAR <kbd>Q</kbd></button><small class="once-note">ONCE PER ROUND · MANUAL ONLY</small></div>
+        <div class="console-footer"><button id="help-btn">ⓘ HOW TO PLAY</button><span>SIM TICK <b>60 HZ</b></span></div>
+      </aside>
+    </main>
+
+    <section id="workshop-panel" class="overlay-panel" aria-hidden="true"><div class="overlay-backdrop" data-close></div><div class="panel-sheet"><div class="sheet-top"><div><span class="eyebrow">BUILD YOUR STRATEGY</span><h2>Workshop<span class="period">.</span></h2></div><button class="close-btn" data-close>×</button></div><p class="sheet-copy">Every component changes the physics. Trade top speed for stability, or weight for a sharper hit. All parts are competitive from day one.</p><div id="workshop-slots" class="workshop-slots"></div><div class="workshop-bottom"><div class="build-preview"><span>LIVE BUILD</span><b id="workshop-build-name">ASTRA VANGUARD</b><small id="workshop-build-stats">SPIN 76 · BURST 70</small></div><button id="save-build" class="primary-button">EQUIP BUILD <span>↗</span></button></div></div></section>
+    <section id="bot-panel" class="overlay-panel" aria-hidden="true"><div class="overlay-backdrop" data-close></div><div class="panel-sheet compact-sheet"><div class="sheet-top"><div><span class="eyebrow">TRAIN YOUR RIVAL</span><h2>Bot settings<span class="period">.</span></h2></div><button class="close-btn" data-close>×</button></div><label class="form-label">PERSONALITY<select id="bot-personality"><option value="tactician">Tactician · patient counterplay</option><option value="aggressive">Aggressive · seeks contact</option><option value="survivor">Survivor · protects spin</option><option value="chaotic">Wildcard · unpredictable</option></select></label><label class="form-label">DIFFICULTY<select id="bot-difficulty"><option value="casual">Casual</option><option value="standard" selected>Standard</option><option value="expert">Expert</option></select></label><p class="fairness-note">Difficulty adjusts steering pressure only. No hidden combat-stat bonuses.</p><button id="save-bot" class="primary-button full-button">SAVE RIVAL SETTINGS ↗</button></div></section>
+    <section id="help-panel" class="overlay-panel" aria-hidden="true"><div class="overlay-backdrop" data-close></div><div class="panel-sheet compact-sheet"><div class="sheet-top"><div><span class="eyebrow">FIELD MANUAL</span><h2>How to play<span class="period">.</span></h2></div><button class="close-btn" data-close>×</button></div><div class="rules-list"><div><b>01 · LAUNCH</b><p>Press launch or Space. Each round alternates 10 seconds of autonomous physics with 10 seconds of manual control.</p></div><div><b>02 · STEER</b><p>Drag the joystick or use WASD / arrow keys to influence movement. DASH adds forward thrust. TILT trades speed for a stronger, less stable impact. Choose only one special action per manual phase.</p></div><div><b>03 · AVATAR ATTACK</b><p>When Burst Health falls to 50% or less, manually activate your Core's unique Avatar once this round.</p></div><div><b>04 · WIN THE MATCH</b><p>Ring Out: 2 points · Spin Finish: 1 point · Burst Finish: 3 points. First to 5 wins. Build stats alter mass, grip, drag, spin reserve, and impact.</p></div></div></div></section>
+    <div id="toast" class="toast" role="status"></div>
+  </div>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
